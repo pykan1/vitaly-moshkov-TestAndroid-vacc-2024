@@ -1,4 +1,4 @@
-package com.example.foodapp.root
+package com.example.foodapp.root.screens.root
 
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
