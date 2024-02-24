@@ -32,11 +32,11 @@ import com.example.foodapp.root.screens.mainTab.tabs.ProfileTab
 class MainTabScreen(private val tab: Tab = MainTab) : Screen {
 
     @Composable
-    override fun Content() {
-        val tabs = listOf(MainTab, ProfileTab, BucketTab)
+    override fun Content() { val tabs = listOf(MainTab, ProfileTab, BucketTab)
         TabNavigator(
             tab = tab
         ) {
+            val tabNavigator = LocalTabNavigator.current
             Column(modifier = Modifier.fillMaxSize().background(Color.White)) {
                 Box(modifier = Modifier.weight(1f)) {
                     it.current.Content()
@@ -47,8 +47,6 @@ class MainTabScreen(private val tab: Tab = MainTab) : Screen {
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     tabs.forEach {
-                        val tabNavigator = LocalTabNavigator.current
-                        println(tabNavigator)
                         Column(
                             modifier = Modifier.padding(vertical = 5.dp).size(45.dp).clickable {
                                 tabNavigator.current = it

@@ -15,12 +15,15 @@ internal class FoodByCategoryViewModel : BaseScreenModel<FoodByCategoryState, Fo
     fun loadFoods(category: String) = intent {
         launchOperation(
             operation = {
-                foodByCategoryUseCase.execute(FoodByCategoryUseCase.Params(category = category), it)
+                foodByCategoryUseCase.execute(
+                    FoodByCategoryUseCase.Params(category = category),
+                    it
+                )
             },
             success = {
                 reduceLocal {
                     state.copy(
-                        foods = it
+                        foods = it, category = category
                     )
                 }
             }

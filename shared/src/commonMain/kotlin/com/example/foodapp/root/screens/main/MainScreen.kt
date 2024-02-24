@@ -65,7 +65,6 @@ internal class MainScreen : Screen {
                         modifier = Modifier.fillMaxWidth().padding(7.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-
                         FoodImage(
                             url = it.strCategoryThumb, modifier = Modifier.size(64.dp).clip(
                                 CircleShape

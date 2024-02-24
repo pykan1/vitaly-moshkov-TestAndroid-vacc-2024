@@ -7,9 +7,7 @@ import platform.UIKit.UIViewController
 
 
 fun MainViewController(): UIViewController {
-
     KoinInjector.koinApp
-
     return ComposeUIViewController {
         RootApp()
     }
