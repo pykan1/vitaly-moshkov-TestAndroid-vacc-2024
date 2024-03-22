@@ -1,0 +1,18 @@
+CREATE TABLE bucketDB (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    idMeal TEXT,
+    strMeal TEXT,
+    imgMeal TEXT
+);
+
+insertBucketFood:
+INSERT INTO bucketDB(idMeal, strMeal, imgMeal) VALUES (?, ?, ?);
+
+loadBucketFood:
+SELECT * FROM bucketDB;
+
+deleteFoodFromBucket:
+DELETE FROM bucketDB WHERE id = :id;
+
+orderBucket:
+DELETE FROM bucketDB;

@@ -11,6 +11,14 @@ plugins {
     alias(libs.plugins.compose)
 }
 
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("com.example")
+        }
+    }
+}
+
 configure<de.jensklingenberg.ktorfit.gradle.KtorfitGradleConfiguration>{
     version = libs.versions.ktorfit.asProvider().get()
 }
@@ -115,7 +123,7 @@ kotlin {
         }
 
         iosMain.dependencies {
-
+            implementation(libs.sqldelight.driver.ios)
         }
 
         androidMain.dependencies {
@@ -125,6 +133,11 @@ kotlin {
              * ViewModel
              */
             implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+            /**
+             * Sqldelight
+             */
+            implementation(libs.sqldelight.driver.android)
         }
     }
 }
