@@ -1,5 +1,7 @@
 package com.example.foodapp.screens.foodByCategory
 
+import com.example.foodapp.data.db.FoodDataSource
+import com.example.foodapp.domain.models.FoodUI
 import com.example.foodapp.domain.usecases.FoodByCategoryUseCase
 import com.example.foodapp.platform.BaseScreenModel
 import com.example.foodapp.screens.foodByCategory.FoodByCategoryEvent
@@ -12,7 +14,7 @@ internal class FoodByCategoryViewModel : BaseScreenModel<FoodByCategoryState, Fo
 ) {
 
     private val foodByCategoryUseCase: FoodByCategoryUseCase by inject()
-
+    private val dataSource: FoodDataSource by inject()
 
     fun loadFoods(category: String) = intent {
         launchOperation(
@@ -30,6 +32,10 @@ internal class FoodByCategoryViewModel : BaseScreenModel<FoodByCategoryState, Fo
                 }
             }
         )
+    }
+
+    fun insertInBucket(it: FoodUI) = intent {
+        dataSource.insertFoodToBucket(it)
     }
 }
 

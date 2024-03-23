@@ -11,11 +11,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Icon
 import androidx.compose.material3.Card
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.HPlusMobiledata
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,7 +35,9 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.example.foodapp.domain.models.FoodUI
 import com.example.foodapp.screens.FoodImage
 import com.example.foodapp.screens.foodDetail.FoodDetailScreen
 
@@ -77,29 +82,14 @@ internal class FoodByCategoryScreen(private val category: String) : Screen {
             }
 
             items(state.foods) {
-                Card(
-                    modifier = Modifier.fillMaxWidth().clickable {
-                        navigator.push(FoodDetailScreen(it.idMeal))
-                    },
-                    colors = CardDefaults.cardColors(containerColor = Color.White)
-                ) {
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(7.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                FoodItem(navigator, it.idMeal, it.strMeal, it.strMealThumb) {
+                    IconButton(
+                        modifier = Modifier.size(24.dp),
+                        onClick = {
+                            viewModel.insertInBucket(it)
+                        },
                     ) {
-                        FoodImage(
-                            modifier = Modifier.size(45.dp).clip(CircleShape),
-                            url = it.strMealThumb,
-                            contentScale = ContentScale.Crop
-                        )
-
-                        Text(
-                            text = it.strMeal,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.W600,
-                            modifier = Modifier.padding(start = 12.dp)
-                        )
+                        Icon(contentDescription = null, imageVector = Icons.Default.Add)
                     }
 
                 }
@@ -107,6 +97,42 @@ internal class FoodByCategoryScreen(private val category: String) : Screen {
         }
 
     }
+}
 
+@Composable
+internal fun FoodItem(
+    navigator: Navigator,
+    idMeal: String,
+    strMeal: String,
+    strMealThumb: String,
+    icon: @Composable (() -> Unit)
+) {
+    Card(
+        modifier = Modifier.fillMaxWidth().clickable {
+            navigator.push(FoodDetailScreen(idMeal))
+        },
+        colors = CardDefaults.cardColors(containerColor = Color.White)
+    ) {
 
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(7.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            FoodImage(
+                modifier = Modifier.size(45.dp).clip(CircleShape),
+                url = strMealThumb,
+                contentScale = ContentScale.Crop
+            )
+
+            Text(
+                text = strMeal,
+                fontSize = 16.sp,
+                fontWeight = FontWeight.W600,
+                modifier = Modifier.weight(1f).padding(start = 12.dp, end = 15.dp)
+            )
+
+            icon()
+        }
+
+    }
 }

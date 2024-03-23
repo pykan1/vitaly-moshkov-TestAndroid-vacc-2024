@@ -10,11 +10,11 @@ actual class DriverFactory {
         return NativeSqliteDriver(
             Database.Schema,
             "bucket.db",
-//            onConfiguration = { config: DatabaseConfiguration ->
-//                config.copy(
-//                    extendedConfig = DatabaseConfiguration.Extended(foreignKeyConstraints = true)
-//                )
-//            }
+            onConfiguration = { config: DatabaseConfiguration ->
+                config.copy(
+                    extendedConfig = DatabaseConfiguration.Extended(foreignKeyConstraints = true)
+                )
+            }
         )
     }
 }

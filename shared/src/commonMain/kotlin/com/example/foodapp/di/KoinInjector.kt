@@ -12,7 +12,8 @@ object KoinInjector {
                 networkModule,
                 repositoryModule,
                 useCaseModule,
-                apiModule
+                apiModule,
+                DataSourceModule
             )
         )
     }
