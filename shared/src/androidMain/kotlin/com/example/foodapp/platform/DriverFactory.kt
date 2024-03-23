@@ -13,11 +13,11 @@ actual class DriverFactory(private val context: Context) {
             Database.Schema,
             context,
             "bucket.db",
-            callback = object : AndroidSqliteDriver.Callback(Database.Schema) {
-                override fun onOpen(db: SupportSQLiteDatabase) {
-                    db.setForeignKeyConstraintsEnabled(true)
-                }
-            }
+//            callback = object : AndroidSqliteDriver.Callback(Database.Schema) {
+//                override fun onOpen(db: SupportSQLiteDatabase) {
+//                    db.setForeignKeyConstraintsEnabled(true)
+//                }
+//            }
         )
     }
 }
